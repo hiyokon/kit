@@ -1,0 +1,18 @@
+startup_message off
+
+defkanji utf-8
+defencoding utf-8
+#encoding utf-8 utf-8
+#setenv LANG ja_JP_UTF-8
+
+defbce "on"
+term xterm-256color
+
+#termcapinfo xterm* 'Co#256:pa#256:AB=\E[48;5;%dm:AF=\    E[38;5;%dm:'
+#attrcolor b ".I"
+
+# default shell to invoke with ^T-c
+shell /bin/bash
+
+hardstatus string "%?%h%:%t (screen #%n on %H)%?"
+caption always "%{= dd}%-Lw%40L>%?%F%{=b yw}%:[%? %n%f     %t %?%F%{-}%:]%?%+Lw %?%F%-013=%{=b yw} hiyoko %:%=%    ?"
