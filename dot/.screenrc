@@ -13,6 +13,12 @@ term xterm-256color
 
 # default shell to invoke with ^T-c
 shell /bin/bash
-
+zombie ^[
+escape ^Jj
 hardstatus string "%?%h%:%t (screen #%n on %H)%?"
 caption always "%{= dd}%-Lw%40L>%?%F%{=b yw}%:[%? %n%f     %t %?%F%{-}%:]%?%+Lw %?%F%-013=%{=b yw} hiyoko %:%=%    ?"
+
+bind r eval 'echo "Resize window"' 'command -c resize'
+bind -c resize ^]  command
+bind -c resize j eval 'resize +1' 'command -c resize'
+bind -c resize k eval 'resize -1' 'command -c resize'
