@@ -42,7 +42,15 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'git://github.com/majutsushi/tagbari.git'
 
-
-
 filetype plugin on
 filetype indent on
+
+"---
+" foo
+"---
+
+command! ReloadVimrc source $MYVIMRC
+nnoremap <silent> <Space>ev :<C-u>edit $MYVIMRC<CR>
+nnoremap <silent> <Space>rv :<C-u>source $MYVIMRC<CR>
+" noremap ;; f;ce
+command! CblIf r ~/if.cbl
