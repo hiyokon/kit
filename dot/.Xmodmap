@@ -1,0 +1,25 @@
+! xmodmap ~/.xmodmap
+! keycode = keysym
+! xev
+! xmodmap -pke
+
+! henkan -> zenkaku_hankaku
+keycode 100 = Zenkaku_Hankaku
+
+! zenkaku_hankaku -> escape
+! keycode 49 = Escape
+
+! katakana_hiragana -> 
+! keycode 101 =
+
+! ctrl <-> caps_lock
+remove Lock = Caps_Lock
+! remove Control = Control_L
+! keysym Control_L = Caps_Lock
+keysym Caps_Lock = Control_L
+! add Lock = Caps_Lock
+add Control = Control_L
+
+! muhenkan <-> escape
+keycode 9 = Muhenkan
+keycode 102 = Escape
