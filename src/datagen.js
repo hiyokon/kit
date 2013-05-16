@@ -29,7 +29,7 @@ function cols2rows(aa) {
         var ati = bind(arrayAt, {x:i});
         rows[i] = aa.map(ati);
         // or -> rows.push(aa.map(ati);
-        // print(rows);
+        // console.log(rows);
     }
     return rows
 }
@@ -38,12 +38,13 @@ function mapper(f) {
     return function (a) {return map(a, f);};
 }
 
-function makecsv(aa, filename) {
-var file = new java.io.File(filename);
-var out = new java.io.FileWriter(file);
+exports.makecsv = function makecsv(aa, filename) {
+//var file = new java.io.File(filename);
+//var out = new java.io.FileWriter(file);
 var bb = cols2rows(aa);
 for (i=0; i < aa.length; i++) {
-out.write(csvrow(bb[i]));
+//out.write(csvrow(bb[i]));
+console.log(csvrow(bb[i]));
 };
-out.close();
+//out.close();
 }
