@@ -51,6 +51,9 @@ filetype indent on
 
 command! ReloadVimrc source $MYVIMRC
 nnoremap <silent> <Space>ev :<C-u>edit $MYVIMRC<CR>
-nnoremap <silent> <Space>rv :<C-u>source $MYVIMRC<CR>
+nnoremap <Space>rv :<C-u>source $MYVIMRC<CR>
 " noremap ;; f;ce
-command! CblIf r ~/if.cbl
+command! IfCbl r ~/if.cbl
+noremap <C-i> :<C-u><Space><C-r><C-w><CR>
+nnoremap H; :<C-u>help<Space><C-r><C-w><CR>
+
