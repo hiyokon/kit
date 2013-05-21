@@ -1,0 +1,87 @@
+"+----------------------------------------------------------------------------------------+
+" Basic Setting
+"+----------------------------------------------------------------------------------------+
+
+highlight CmdLine font-family: monospace; padding: 0px; background-color: black; color: #00FF00;
+highlight CompDesc width: 500px; max-width: 500px; color: gray; color: #272;
+highlight Hint font-size; medium; font-weight: bold; text-transform: uppercase; color: black; background-color: rgba(85,255,255,0.7); z-index 99999;
+highlight StatusLine font-weight: bold; padding: 0px; background-color: white; color: red;
+" highlight StatusLineExtended color: #900; background: #FFFFFF; font-weight: normal;
+
+" http://blog.ruedap.com/entry/20100813/vimperator_completion_fontsize
+highlight CompTitle font-weight: bold; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " タイトル
+highlight CompResult width: 45%; overflow: highlightdden; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 結果欄（左側）
+highlight CompDesc width: 50%; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 説明欄（右側）
+highlight CompItem font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 補完リストの1行
+highlight CompItem[selected] color: #FFF; background: #000; font-weight: normal; font-size: 10pt; font-family: Menlo, Consolas, Monaco, monospace; " 補完リストの選択している行
+highlight Filter color: #06E; font-weight: bold; " 補完リストでマッチしたテキスト
+
+
+"Editor
+"set editor='/usr/local/bin/emacsclient'
+"set editor='/usr/bin/vim'
+
+"IME contral
+style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+"Full Screen
+"set fs
+
+"Browser Title
+set titlestring=Firefox
+
+"Ber
+"set gui=noaddons
+
+"Enphasize seached wordsset hlsearch
+"Not focus on textbox after page loading
+set focuscontent
+
+"Using visual bell instead of beep sound
+set visualbell
+
+"Hintchars
+set hintchars=123456789
+
+set ignorecase
+"+----------------------------------------------------------------------------------------+
+" Search Setting
+"+----------------------------------------------------------------------------------------+
+
+"Google search
+nnoremap o :set<Space>cpt=S<CR>:open<Space>
+
+"Google search tabopen
+nnoremap t :set<Space>cpt=S<CR>:tabopen<Space>
+
+"History
+
+"Bookmark
+nnoremap s :set<Space>cpt=l<CR>:tabopen<Space>
+
+"I'm feeling lucky
+"nnoremap w :set<Space>cpt=S<CR>:tabopen<Space>lu<Space>
+
+"Wikipedia search
+nnoremap w :set<Space>cpt=S<CR>:tabopen<Space>wikipedia<Space>
+
+"+----------------------------------------------------------------------------------------+
+" Keymap Setting
+"+----------------------------------------------------------------------------------------+
+
+"j/k 8 times
+map j 8<C-e>
+map k 8<C-y>
+map J 1<C-e>
+map K 1<C-y>
+
+"h/l tab trans
+map h <C-p>
+map l <C-n>
+
+noremap i gi
+noremap C c
+noremap c ;c
+
+noremap x :set<space>cpt=s<CR>:tabopen<space>https://www.google.com/#hl=ja&tbs=qdr:y&q=
+map <C-r> :source ~/.vimperatorrc<CR>
