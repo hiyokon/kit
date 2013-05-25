@@ -18,7 +18,7 @@ highlight Filter color: #06E; font-weight: bold; " 補完リストでマッチ�
 
 
 "Editor
-"set editor='/usr/local/bin/emacsclient'
+set editor='/usr/local/bin/emacsclient'
 "set editor='/usr/bin/vim'
 
 "IME contral
