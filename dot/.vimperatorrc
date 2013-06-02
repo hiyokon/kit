@@ -41,7 +41,7 @@ set focuscontent
 set visualbell
 
 "Hintchars
-set hintchars=123456789
+set hintchars=123456789[],./
 
 set ignorecase
 "+----------------------------------------------------------------------------------------+
@@ -85,3 +85,4 @@ noremap c ;c
 
 noremap x :set<space>cpt=s<CR>:tabopen<space>https://www.google.com/#hl=ja&tbs=qdr:y&q=
 map <C-r> :source ~/.vimperatorrc<CR>
+
