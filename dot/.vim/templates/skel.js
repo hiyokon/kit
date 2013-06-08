@@ -1,3 +1,4 @@
 // @filename.js
-// var
+// vars
 // func @func
+// main

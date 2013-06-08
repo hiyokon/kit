@@ -19,6 +19,7 @@ set smartcase
 set statusline=%F%r%m%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set autowrite
 set hidden
+set nowrap
 "-------
 " color
 "-------
@@ -82,16 +83,16 @@ map ' `
 "---
 " inoremap
 "---
-inoremap { {}<Up>
-inoremap } {}
+inoremap { {}
+inoremap } {}<Up><ESC>A
 inoremap ( ()<Left>
 inoremap [ []<Left>
-inoremap ' ''<Left>
-inoremap " ""<Left>
+inoremap ' ""<Left>
+inoremap " ''<Left>
 
 inoremap jk <ESC><Left>
 inoremap jj <Down>
-inoremap ll <Left>
+inoremap ll <Right>
 
 "---
 " nnoremap
@@ -105,6 +106,8 @@ nnoremap <Up>   gk
 nnoremap 1 0
 nnoremap 0 $
 
+nnoremap ; :
+
 nnoremap <Space>ev :<C-u>edit $MYVIMRC<CR>
 nnoremap <Space>rv :<C-u>source $MYVIMRC<CR>
 nnoremap HL :<C-u>help<Space><C-r><C-w><CR>
@@ -112,6 +115,12 @@ nnoremap HL :<C-u>help<Space><C-r><C-w><CR>
 nnoremap <C-n> :<C-u> bnext<CR>
 nnoremap <C-p> :<C-u> previous<CR>
 " nnoremap <F4> :grep <cword> ./*
+
+"---
+" vnoremap
+"---
+
+vnoremap ; :
 
 "---
 " cnoremap
@@ -138,6 +147,6 @@ augroup END
 
 function! JSCommentToCode()
     %s/\(.\+\n\)/\1
-    %s/\(\/\/ var\)/\1var @var = @val;
-    %s/\(\/\/ func \)\(.\+\)/\1\2function \2() {}
+    %s/\(\s*\)\(\/\/ vars\)/\1\2\1var @var      = @val;
+    %s/\(\s*\)\(\/\/ func \)\(.\+\)/\1\2\3\1function \3(@args) {\1}
 endfunction
