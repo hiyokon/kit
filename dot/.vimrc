@@ -1,36 +1,45 @@
 "-------
 " set
 "-------
-set expandtab "tab3space"
-set autoindent
-set smartindent
-set incsearch
+
 set list
 set listchars=tab:>-,trail:-
-set number
+set showmatch
+set expandtab "tab3space"
 set shiftwidth=4 "indent space"
-set showmatch "()"
 set tabstop=4 "tabs is 4spaces"
 set wildmenu
+set number
+set nowrap
+set autoindent
+set smartindent
 set cursorline
 set laststatus=2
-set ignorecase
-set smartcase
 set statusline=%F%r%m%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set autowrite
 set hidden
-set nowrap
+set ignorecase
+set smartcase
+set incsearch
+set nohlsearch
+
 "-------
 " color
 "-------
+
 colorscheme darkblue
-""autocmd InsertEnter,InsertLeave * set cursorline!
-highlight CursorLine cterm=bold ctermbg=red
-hi LineNr ctermfg=DarkMagenta
+au InsertEnter,InsertLeave * set cursorline!
+" au InsertEnter * hi CursolLine ctermbg=DarkYellow
+" au InsertLeave * hi CursolLine ctermbg=DarkGray
+" highlight CursorLine cterm=bold ctermbg=red
+" hi LineNr ctermfg=DarkMagenta
+
 "-------
 " syntax
 "-------
+
 syntax on
+
 "-------
 " plugin
 "-------
@@ -44,26 +53,28 @@ syntax on
 "   call neobundle#rc(expand('~/.vim/.bundle'))
 " endif
 "
-" " NeoBundle 'git://github.com/Shougo/unite.vim.git'
-" " NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-" " NeoBundle 'thinca/vim-ref'
-" " NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
-" " NeoBundle 'Shougo/neosnippet'
-" " NeoBundle 'scrooloose/syntastic'
-" " NeoBundle 'Shougo/vimshell'
-" " NeoBundle 'git://github.com/majutsushi/tagbari.git'
+" NeoBundle 'git://github.com/Shougo/unite.vim.git'
+" NeoBundle 'git://github.com/Shougo/neocomplcache.git'
+" NeoBundle 'thinca/vim-ref'
+" NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+" NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'Shougo/vimshell'
+" NeoBundle 'git://github.com/majutsushi/tagbari.git'
 "
 " filetype plugin on
 " filetype indent on
-"
+
 "---
 " vimrc
 "---
 
 " command! ReloadVimrc source $MYVIMRC
+
 "---
 " cobol
 "---
+
 " noremap ;; f;ce
 " command! IfCbl r ~/if.cbl
 " noremap <C-i> :<C-u><Space><C-r><C-w><CR>
@@ -83,7 +94,8 @@ map ' `
 "---
 " inoremap
 "---
-inoremap { {}
+
+inoremap { {}<Left>
 inoremap } {}<Up><ESC>A
 inoremap ( ()<Left>
 inoremap [ []<Left>
@@ -112,8 +124,8 @@ nnoremap <Space>ev :<C-u>edit $MYVIMRC<CR>
 nnoremap <Space>rv :<C-u>source $MYVIMRC<CR>
 nnoremap HL :<C-u>help<Space><C-r><C-w><CR>
 
-nnoremap <C-n> :<C-u> bnext<CR>
-nnoremap <C-p> :<C-u> previous<CR>
+nnoremap <C-n> :<C-u> bn<CR>
+nnoremap <C-p> :<C-u> bp<CR>
 " nnoremap <F4> :grep <cword> ./*
 
 "---
@@ -133,8 +145,25 @@ cnoremap <C-e> <End>
 cnoremap <C-f> <Right>
 cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
-cnoremap <Esc><C-B>    <S-Left>
-cnoremap <Esc><C-F>    <S-Right>
+cnoremap <Esc><C-B> <S-Left>
+cnoremap <Esc><C-F> <S-Right>
+
+"---
+" java
+"---
+
+function! JAVANewFile(fn)
+    let file = a:fn . ".java"
+    execute "w " . expand(a:file)
+    execute "e " . expand(a:file)
+"   w \<C-r>=expand(a:fn)
+"   e \<C-r>=expand(a:fn)
+endfunction
+
+" function! ArgToFunction(fn)
+"     let wd = <C-r><C-w>
+"     execute "s#\(" . expand(a:wd) . "\)#" . expand(a:fn) . "(\1)"
+" endfunction
 
 "---
 " javascript
@@ -143,6 +172,7 @@ cnoremap <Esc><C-F>    <S-Right>
 augroup SkeletonAu
     autocmd!
     autocmd BufNewFile *.js 0r $HOME/.vim/templates/skel.js
+    autocmd BufNewFile *.js 1s#@filename#\=expand('%:r')
 augroup END
 
 function! JSCommentToCode()
