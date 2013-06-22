@@ -123,6 +123,7 @@ nnoremap ; :
 nnoremap <Space>ev :<C-u>edit $MYVIMRC<CR>
 nnoremap <Space>rv :<C-u>source $MYVIMRC<CR>
 nnoremap HL :<C-u>help<Space><C-r><C-w><CR>
+" nnoremap HK :<C-u>help<Space><cword><CR>
 
 nnoremap <C-n> :<C-u> bn<CR>
 nnoremap <C-p> :<C-u> bp<CR>
@@ -160,10 +161,10 @@ function! JAVANewFile(fn)
 "   e \<C-r>=expand(a:fn)
 endfunction
 
-" function! ArgToFunction(fn)
-"     let wd = <C-r><C-w>
-"     execute "s#\(" . expand(a:wd) . "\)#" . expand(a:fn) . "(\1)"
-" endfunction
+function! ArgToFunction(fn)
+"    execute s#\(" . expand(a:wd) . "\)#" . expand(a:fn) . "(\1)"
+"    s#\<cword>#\=expand(a:fn)(\1)
+endfunction
 
 "---
 " javascript
