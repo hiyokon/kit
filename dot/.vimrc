@@ -27,7 +27,8 @@ set nohlsearch
 " color
 "-------
 
-colorscheme darkblue
+colorscheme ron
+" colorscheme darkblue
 au InsertEnter,InsertLeave * set cursorline!
 " au InsertEnter * hi CursolLine ctermbg=DarkYellow
 " au InsertLeave * hi CursolLine ctermbg=DarkGray
@@ -46,13 +47,12 @@ syntax on
 
 " set nocompatible
 " filetype off
-
+" 
 " if has('vim_starting')
-"   set runtimepath+=~/.vim/.bundle/neobundle.vim.git
-"
-"   call neobundle#rc(expand('~/.vim/.bundle'))
+"     set runtimepath+=~/.vim/neobundle.vim
+"     call neobundle#rc(expand('~/.vim/bundle'))
 " endif
-"
+" 
 " NeoBundle 'git://github.com/Shougo/unite.vim.git'
 " NeoBundle 'git://github.com/Shougo/neocomplcache.git'
 " NeoBundle 'thinca/vim-ref'
@@ -61,7 +61,7 @@ syntax on
 " NeoBundle 'scrooloose/syntastic'
 " NeoBundle 'Shougo/vimshell'
 " NeoBundle 'git://github.com/majutsushi/tagbari.git'
-"
+" 
 " filetype plugin on
 " filetype indent on
 
@@ -106,6 +106,8 @@ inoremap jk <ESC><Left>
 inoremap jj <Down>
 inoremap ll <Right>
 
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+
 "---
 " nnoremap
 "---
@@ -143,8 +145,8 @@ cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-d> <Del>
 cnoremap <C-e> <End>
-cnoremap <C-f> <Right>
-cnoremap <C-n> <Down>
+cnoremap <c-f> <right>
+cnoremap <c-n> <down>
 cnoremap <C-p> <Up>
 cnoremap <Esc><C-B> <S-Left>
 cnoremap <Esc><C-F> <S-Right>
@@ -181,3 +183,53 @@ function! JSCommentToCode()
     %s/\(\s*\)\(\/\/ vars\)/\1\2\1var @var      = @val;
     %s/\(\s*\)\(\/\/ func \)\(.\+\)/\1\2\3\1function \3(@args) {\1}
 endfunction
+
+"---
+" macvim-kaoriya
+"---
+
+if has('gui_macvim')
+
+    set transparency=20
+    set guifont=Monaco:h12
+    set lines=90 columns=200
+    set guioptions-=T
+    set nobackup
+    set visualbell t_vb=
+    colorscheme ron
+
+    set fuoptions=maxvert,maxhorz
+    autocmd GUIEnter * set fullscreen
+
+endif
+
+"---
+" vim-indent-guides
+"---
+
+set runtimepath+=~/.vim/plugin/vim-indent-guides
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+
+"---
+" macvim-kaoriya
+"---
+
+set runtimepath+=~/.vim/plugin/qfixapp
+let QFixHowm_Key = 'g'
+
+let howm_dir             = '~/howm'
+let howm_fileencoding    = 'utf-8'
+let howm_fileformat      = 'unix'
+
+let QFixHowm_FileType    = 'howm_memo.markdown'
+let QFixHowm_FoldingPattern    = '^[=.*[]'
+
+let QFixHowm_HomeMode    = 0
+let QFixHowm_Title       = '#'
+let suffix               = 'md'
+let QFixHowm_UserFileType    = 'markdown'
+let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.'.suffix
