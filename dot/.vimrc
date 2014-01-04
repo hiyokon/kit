@@ -21,7 +21,9 @@ set hidden
 set ignorecase
 set smartcase
 set incsearch
-set nohlsearch
+set hlsearch
+
+nmap <silent><ESC><ESC> :nohlsearch<CR>
 
 "-------
 " color
@@ -45,25 +47,60 @@ syntax on
 " plugin
 "-------
 
-" set nocompatible
-" filetype off
-" 
-" if has('vim_starting')
-"     set runtimepath+=~/.vim/neobundle.vim
-"     call neobundle#rc(expand('~/.vim/bundle'))
-" endif
-" 
-" NeoBundle 'git://github.com/Shougo/unite.vim.git'
-" NeoBundle 'git://github.com/Shougo/neocomplcache.git'
-" NeoBundle 'thinca/vim-ref'
-" NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
-" NeoBundle 'Shougo/neosnippet'
-" NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'Shougo/vimshell'
-" NeoBundle 'git://github.com/majutsushi/tagbari.git'
-" 
-" filetype plugin on
-" filetype indent on
+filetype off
+
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+
+call neobundle#rc(expand('~/.vim/bundle'))
+
+NeoBundleFetch "Shougo/neobundle.vim"
+
+NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'Shougo/neocomplcache.git'
+NeoBundle 'Shougo/neocomplete.vim.git'
+NeoBundle 'Shougo/vimfiler.vim.git'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
+""NeoBundle 'Shougo/vimshell'
+""NeoBundle 'thinca/vim-ref'
+""NeoBundle 'Shougo/neobundle.vim.git'
+""NeoBundle 'Shougo/neosnippet'
+""NeoBundle 'scrooloose/syntastic'
+""NeoBundle 'majutsushi/tagbari.git'
+
+
+NeoBundle "dag/vim2hs"
+
+NeoBundle "ujihisa/neco-ghc"
+NeoBundle "ujihisa/ref-hoogle"
+NeoBundle "ujihisa/unite-haskellimport"
+
+NeoBundle "eagletmt/ghcmod-vim"
+NeoBundle "eagletmt/unite-haddock"
+
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle "thinca/vim-ref"
+
+NeoBundle "osyo-manga/vim-watchdogs"
+
+
+filetype plugin indent on
+NeoBundleCheck
+
+set runtimepath+=~/.cabal/bin
+
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
 
 "---
 " vimrc
@@ -71,42 +108,26 @@ syntax on
 
 " command! ReloadVimrc source $MYVIMRC
 
-"---
-" cobol
-"---
-
-" noremap ;; f;ce
-" command! IfCbl r ~/if.cbl
-" noremap <C-i> :<C-u><Space><C-r><C-w><CR>
-
-"---
-" map
-"---
-
-map ' `
-
-"---
-" map
-"---
-
-" imap <C-k> <ESC>"*pa
 
 "---
 " inoremap
 "---
 
 inoremap { {}<Left>
-inoremap } {}<Up><ESC>A
+""inoremap } {}<Up><ESC>A
 inoremap ( ()<Left>
 inoremap [ []<Left>
-inoremap ' ""<Left>
-inoremap " ''<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
 
 inoremap jk <ESC><Left>
-inoremap jj <Down>
-inoremap ll <Right>
-
 inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
 
 "---
 " nnoremap
@@ -117,10 +138,13 @@ nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up>   gk
 
+nnoremap ; :
 nnoremap 1 0
 nnoremap 0 $
 
-nnoremap ; :
+noremap ^? ^H
+""noremap ^H
+set backspace=2
 
 nnoremap <Space>ev :<C-u>edit $MYVIMRC<CR>
 nnoremap <Space>rv :<C-u>source $MYVIMRC<CR>
@@ -129,13 +153,15 @@ nnoremap HL :<C-u>help<Space><C-r><C-w><CR>
 
 nnoremap <C-n> :<C-u> bn<CR>
 nnoremap <C-p> :<C-u> bp<CR>
-" nnoremap <F4> :grep <cword> ./*
+noremap <F4> :grep <cword> ./*
 
 "---
 " vnoremap
 "---
 
 vnoremap ; :
+vnoremap 1 0
+vnoremap 0 $
 
 "---
 " cnoremap
@@ -233,3 +259,8 @@ let QFixHowm_Title       = '#'
 let suffix               = 'md'
 let QFixHowm_UserFileType    = 'markdown'
 let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.'.suffix
+
+
+let g:vimfiler_as_default_explorer = 1
+let g:neocomplete#enable_at_startup = 1
+let g:haskell_conceal_wide = 1
